@@ -1,0 +1,330 @@
+<!-- <p>app-home works!</p> -->
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a class="logo" href="#">
+      <!-- <div class="logo-badge">
+        <span class="logo-icon">月繳</span>
+      </div>
+      <div class="logo-text">
+        <span class="logo-main">買家電</span>
+        <span class="logo-sub">越早用越早省</span>
+      </div> -->
+      <img src="images/brand-logo-wordmark.svg" alt="logo" class="logo-image" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="desktop-nav">
+      @for (item of navItems; track item) {
+      <a class="nav-link" href="#">{{ item }}</a>
+      }
+    </nav>
+
+    <!-- Search + Cart -->
+    <div class="header-actions">
+      <div class="search-wrap">
+        <lucide-icon [img]="SearchIcon" size="16" class="search-icon" />
+        <input class="search-input" type="text" placeholder="搜尋您心儀的家電..." [value]="searchQuery()"
+          (input)="updateSearch($any($event.target).value)" />
+      </div>
+      <button class="cart-btn" (click)="addToCart(allProducts[0])">
+        <lucide-icon [img]="CartIcon" size="20" />
+        @if (cartCount() > 0) {
+        <span class="cart-badge">{{ cartCount() }}</span>
+        }
+      </button>
+      <!-- Mobile hamburger -->
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        @if (mobileMenuOpen()) {
+        <lucide-icon [img]="XIcon" size="22" />
+        } @else {
+        <lucide-icon [img]="MenuIcon" size="22" />
+        }
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  @if (mobileMenuOpen()) {
+  <nav class="mobile-nav">
+    @for (item of navItems; track item) {
+    <a class="mobile-nav-link" href="#" (click)="mobileMenuOpen.set(false)">{{ item }}</a>
+    }
+  </nav>
+  }
+</header>
+
+<!-- ===== MAIN LAYOUT ===== -->
+<div class="page-wrapper">
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <!-- Category -->
+    <div class="sidebar-block">
+      <h3 class="sidebar-title">
+        <lucide-icon [img]="TagIcon" size="14" class="sidebar-title-icon" />
+        家電分類
+      </h3>
+      <p class="sidebar-subtitle">依類別精挑商品</p>
+      <ul class="sidebar-list">
+        @for (cat of categories; track cat.id) {
+        <li>
+          <button class="sidebar-item" [class.active]="selectedCategory() === cat.id" (click)="selectCategory(cat.id)">
+            <span class="dot"></span>
+            {{ cat.label }}
+          </button>
+        </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Brands -->
+    <div class="sidebar-block">
+      <h3 class="sidebar-title">
+        <lucide-icon [img]="ZapIcon" size="14" class="sidebar-title-icon" />
+        熱門品牌
+      </h3>
+      <p class="sidebar-subtitle">依品牌精挑商品</p>
+      <ul class="sidebar-list">
+        @for (brand of brands; track brand.id) {
+        <li>
+          <button class="sidebar-item" [class.active]="selectedBrand() === brand.id" (click)="selectBrand(brand.id)">
+            <span class="dot"></span>
+            {{ brand.label }}
+          </button>
+        </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Price Range -->
+    <div class="sidebar-block price-block">
+      <h3 class="sidebar-title">
+        <lucide-icon [img]="SliderIcon" size="14" class="sidebar-title-icon" />
+        價格區間
+      </h3>
+      <p class="sidebar-subtitle">依價格篩選商品</p>
+      <div class="price-inputs">
+        <div class="price-field">
+          <label>最小金額</label>
+          <input type="number" [value]="minPrice()" (change)="minPrice.set(+$any($event.target).value)" />
+        </div>
+        <div class="price-field">
+          <label>最大金額</label>
+          <input type="number" [value]="maxPrice()" (change)="maxPrice.set(+$any($event.target).value)" />
+        </div>
+      </div>
+      <div class="slider-wrap">
+        <input type="range" class="price-slider" min="0" max="999000" [value]="minPrice()"
+          (input)="minPrice.set(+$any($event.target).value)" />
+      </div>
+    </div>
+
+    <!-- Live Chat -->
+    <button class="chat-btn">
+      <lucide-icon [img]="ChatIcon" size="16" />
+      聯繫線上客服
+    </button>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge">月繳買家電</div>
+        <p class="hero-eyebrow">NEW SEASON ARRIVAL</p>
+        <h1 class="hero-title">
+          旗艦家電<br />
+          <span class="hero-highlight">零壓力</span>升級
+        </h1>
+        <p class="hero-desc">
+          每月只需幾杯咖啡的價格，立即擁有頂級影音與生活體<br class="hidden md:block" />
+          驗。免信用卡，快速審核。
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">立即探索</button>
+          <button class="btn-outline">分期試算</button>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="images/hero-appliances.jpg" alt="旗艦冰箱" class="hero-img" />
+      </div>
+    </section>
+
+    <!-- UNBOXING SECTION -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">生活開箱</h2>
+          <p class="section-sub">真實使用心得，挑選最適合您的家電</p>
+        </div>
+        <a href="#" class="see-more">
+          查看更多
+          <lucide-icon [img]="ChevronRightIcon" size="14" />
+        </a>
+      </div>
+
+      <div class="unboxing-grid">
+        @for (item of unboxingItems; track item.id) {
+        <div class="unboxing-card">
+          <div class="unboxing-thumb">
+            <img [src]="item.image" [alt]="item.title" />
+            <div class="play-overlay">
+              <div class="play-btn">
+                <lucide-icon [img]="PlayIcon" size="20" />
+              </div>
+              <div class="unboxing-logo">月繳<br />買家電</div>
+            </div>
+          </div>
+          <div class="unboxing-info">
+            <h4 class="unboxing-title">{{ item.title }}</h4>
+            <a href="#" class="unboxing-link">
+              {{ item.subtitle }}
+              <lucide-icon [img]="ChevronRightIcon" size="12" />
+            </a>
+          </div>
+        </div>
+        }
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS SECTION -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">精選商品</h2>
+        </div>
+        <div class="tabs">
+          <button class="tab-btn" [class.active]="activeTab() === 'latest'" (click)="setActiveTab('latest')">
+            最新上市
+          </button>
+          <button class="tab-btn" [class.active]="activeTab() === 'popular'" (click)="setActiveTab('popular')">
+            人氣熱銷
+          </button>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        @for (product of filteredProducts(); track product.id) {
+        <div class="product-card">
+          <!-- Badge -->
+          @if (product.badge) {
+          <div class="product-badge" [class]="'badge-' + product.badge">
+            @if (product.badge === 'fast') {
+            <lucide-icon [img]="ZapIcon" size="10" />
+            }
+            @if (product.badge === 'official') {
+            <lucide-icon [img]="ShieldIcon" size="10" />
+            }
+            {{ product.badgeLabel }}
+          </div>
+          }
+
+          <!-- Wishlist -->
+          <button class="wishlist-btn" (click)="toggleWishlist(product.id)"
+            [class.wishlisted]="isWishlisted(product.id)">
+            <lucide-icon [img]="HeartIcon" size="16" />
+          </button>
+
+          <!-- Image -->
+          <div class="product-img-wrap">
+            <img [src]="product.image" [alt]="product.name" class="product-img" />
+          </div>
+
+          <!-- Info -->
+          <div class="product-info">
+            <h4 class="product-name">{{ product.name }}</h4>
+            <div class="product-pricing">
+              <div class="monthly-row">
+                <div class="monthly-logo">月繳</div>
+                <span class="monthly-label">月繳</span>
+                <span class="monthly-price">${{ formatPrice(product.monthlyPrice) }}</span>
+              </div>
+              <p class="original-price">
+                總價 ${{ formatPrice(product.originalPrice) }} ｜ {{ product.months }}期0利率
+              </p>
+            </div>
+            <button class="add-cart-btn" (click)="addToCart(product)">
+              加入購物車
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="logo-badge sm">月繳</div>
+        <div>
+          <p class="footer-logo-main">買家電</p>
+          <p class="footer-logo-sub">越早用越早省</p>
+        </div>
+      </div>
+      <p class="footer-desc">
+        我們致力於透過創新的分期支付方案，讓每個人都能輕鬆擁有高品質的高端家電，提升生活美學與便利性。
+      </p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn line">LINE</a>
+        <a href="#" class="social-btn fb">FB</a>
+        <a href="#" class="social-btn yt">YT</a>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="#">分期辦法</a></li>
+        <li><a href="#">隱私權政策</a></li>
+        <li><a href="#">聯繫我們</a></li>
+        <li><a href="#">常見問題</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h4>服務專區</h4>
+      <ul>
+        <li><a href="#">配送流程</a></li>
+        <li><a href="#">保固服務</a></li>
+        <li><a href="#">特約維修中心</a></li>
+        <li><a href="#">分期試算器</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>客服資訊</h4>
+      <ul>
+        <li>
+          <lucide-icon [img]="PhoneIcon" size="14" />
+          <span>0800-000-000</span>
+        </li>
+        <li>
+          <lucide-icon [img]="MailIcon" size="14" />
+          <span>support&#64;appliance-monthly.com</span>
+        </li>
+        <li>
+          <lucide-icon [img]="ClockIcon" size="14" />
+          <span>週一～週五：09:00 – 18:00</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 月繳買家電. ALL RIGHTS RESERVED.</p>
+    <div class="footer-pay-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">JCB</span>
+    </div>
+  </div>
+</footer>
