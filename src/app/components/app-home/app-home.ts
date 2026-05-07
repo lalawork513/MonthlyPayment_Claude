@@ -72,7 +72,7 @@ export class AppHome { // 保持類名一致
   searchQuery = signal('');
   cartCount = signal(3);
   activeTab = signal<'latest' | 'popular'>('popular');
-  wishlistIds = signal<Set<number>>(new Set([2]));
+  wishlistIds = signal<Set<number>>(new Set([2, 5, 12]));
 
   // Nav items
   readonly navItems = ['冷氣專區', '視聽家電', '冰箱', '洗衣機', '健康美容', '廚房家電', '季節家電', '生活家電'];
@@ -107,7 +107,16 @@ export class AppHome { // 保持類名一致
     { id: 1, name: 'Sony BRAVIA 65吋 4K OLED', image: 'https://cdn1.cybassets.com/media/W1siZiIsIjI3Njc0L3Byb2R1Y3RzLzUxODc5NzI3LzE3MzMzOTE5MTlfM2IzNjBhYTg1MWNhNDU0YmMxZjUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=547e1b7c39a75329', monthlyPrice: 2499, originalPrice: 59900, months: 24, badge: 'fast', badgeLabel: '快速出貨', isWishlisted: false },
     { id: 2, name: 'Dyson V15 Detect', image: 'https://i2.momoshop.com.tw/1777570230/goodsimg/0012/680/852/12680852_R.webp', monthlyPrice: 1200, originalPrice: 22900, months: 24, badge: null, badgeLabel: '', isWishlisted: false },
     { id: 3, name: 'Panasonic 雙門變頻冰箱-鏡面鑽石黑(NR-B261VG-X1)', image: 'https://i3.momoshop.com.tw/1772562098/goodsimg/0011/373/328/11373328_OL.jpg', monthlyPrice: 835, originalPrice: 18392, months: 24, badge: null, badgeLabel: '', isWishlisted: false },
-    { id: 4, name: 'HITACHI 日立 15KG 日製AI智能感測變頻左開熱泵滾筒洗脫烘洗衣機(BD-SX150JJ-W)', image: 'https://i2.momoshop.com.tw/1775037003/goodsimg/0013/439/638/13439638_OR.jpg', monthlyPrice: 3338, originalPrice: 73508, months: 24, badge: 'official', badgeLabel: '官方保固', isWishlisted: true },
+    { id: 4, name: 'HITACHI 日立 15KG 日製AI智能感測變頻左開熱泵滾筒洗脫烘洗衣機(BD-SX150JJ-W)', image: 'https://i2.momoshop.com.tw/1775037003/goodsimg/0013/439/638/13439638_OR.jpg', monthlyPrice: 3338, originalPrice: 73508, months: 24, badge: 'official', badgeLabel: '官方保固', isWishlisted: false },
+    { id: 5, name: 'Sony BRAVIA 65吋 4K OLED', image: 'https://cdn1.cybassets.com/media/W1siZiIsIjI3Njc0L3Byb2R1Y3RzLzUxODc5NzI3LzE3MzMzOTE5MTlfM2IzNjBhYTg1MWNhNDU0YmMxZjUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=547e1b7c39a75329', monthlyPrice: 2499, originalPrice: 59900, months: 24, badge: 'fast', badgeLabel: '快速出貨', isWishlisted: false },
+    { id: 6, name: 'Dyson V15 Detect', image: 'https://i2.momoshop.com.tw/1777570230/goodsimg/0012/680/852/12680852_R.webp', monthlyPrice: 1200, originalPrice: 22900, months: 24, badge: "official", badgeLabel: '官方保固', isWishlisted: false },
+    { id: 7, name: 'Panasonic 雙門變頻冰箱-鏡面鑽石黑(NR-B261VG-X1)', image: 'https://i3.momoshop.com.tw/1772562098/goodsimg/0011/373/328/11373328_OL.jpg', monthlyPrice: 835, originalPrice: 18392, months: 24, badge: null, badgeLabel: '', isWishlisted: false },
+    { id: 8, name: 'HITACHI 日立 15KG 日製AI智能感測變頻左開熱泵滾筒洗脫烘洗衣機(BD-SX150JJ-W)', image: 'https://i2.momoshop.com.tw/1775037003/goodsimg/0013/439/638/13439638_OR.jpg', monthlyPrice: 3338, originalPrice: 73508, months: 24, badge: 'official', badgeLabel: '官方保固', isWishlisted: false },
+    { id: 9, name: 'Sony BRAVIA 65吋 4K OLED', image: 'https://cdn1.cybassets.com/media/W1siZiIsIjI3Njc0L3Byb2R1Y3RzLzUxODc5NzI3LzE3MzMzOTE5MTlfM2IzNjBhYTg1MWNhNDU0YmMxZjUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=547e1b7c39a75329', monthlyPrice: 2499, originalPrice: 59900, months: 24, badge: 'fast', badgeLabel: '快速出貨', isWishlisted: false },
+    { id: 10, name: 'Dyson V15 Detect', image: 'https://i2.momoshop.com.tw/1777570230/goodsimg/0012/680/852/12680852_R.webp', monthlyPrice: 1200, originalPrice: 22900, months: 24, badge: null, badgeLabel: '', isWishlisted: false },
+    { id: 11, name: 'Panasonic 雙門變頻冰箱-鏡面鑽石黑(NR-B261VG-X1)', image: 'https://i3.momoshop.com.tw/1772562098/goodsimg/0011/373/328/11373328_OL.jpg', monthlyPrice: 835, originalPrice: 18392, months: 24, badge: null, badgeLabel: '', isWishlisted: false },
+    { id: 12, name: 'HITACHI 日立 15KG 日製AI智能感測變頻左開熱泵滾筒洗脫烘洗衣機(BD-SX150JJ-W)', image: 'https://i2.momoshop.com.tw/1775037003/goodsimg/0013/439/638/13439638_OR.jpg', monthlyPrice: 3338, originalPrice: 73508, months: 24, badge: 'fast', badgeLabel: '快速出貨', isWishlisted: false },
+
   ];
 
   products = signal<Product[]>(this.allProducts);

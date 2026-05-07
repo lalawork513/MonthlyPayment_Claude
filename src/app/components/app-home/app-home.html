@@ -134,7 +134,8 @@
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <div class="hero-badge">月繳買家電</div>
+        <img src="images/brand-logo-full.svg" alt="月繳買家電" class="footer-logo-img" style="margin-bottom: 8px;" />
+        <!-- <div class="hero-badge">月繳買家電</div> -->
         <p class="hero-eyebrow">NEW SEASON ARRIVAL</p>
         <h1 class="hero-title">
           旗艦家電<br />
@@ -239,13 +240,18 @@
             <h4 class="product-name">{{ product.name }}</h4>
             <div class="product-pricing">
               <div class="monthly-row">
-                <div class="monthly-logo">月繳</div>
-                <span class="monthly-label">月繳</span>
-                <span class="monthly-price">${{ formatPrice(product.monthlyPrice) }}</span>
+                <!-- <div class="monthly-logo">月繳</div> -->
+                <img src="images/brand-logo-circle.svg" alt="月繳" class="monthly-logo-img" />
+                <div>
+                  <div style="text-align: right;">
+                    <span class="monthly-label">月繳</span>
+                    <span class="monthly-price">${{ formatPrice(product.monthlyPrice) }}</span>
+                  </div>
+                  <p class="original-price">
+                    總價 ${{ formatPrice(product.originalPrice) }} ｜ {{ product.months }}期0利率
+                  </p>
+                </div>
               </div>
-              <p class="original-price">
-                總價 ${{ formatPrice(product.originalPrice) }} ｜ {{ product.months }}期0利率
-              </p>
             </div>
             <button class="add-cart-btn" (click)="addToCart(product)">
               加入購物車
@@ -264,11 +270,12 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <div class="logo-badge sm">月繳</div>
+        <!-- <div class="logo-badge sm">月繳</div>
         <div>
           <p class="footer-logo-main">買家電</p>
           <p class="footer-logo-sub">越早用越早省</p>
-        </div>
+        </div> -->
+        <img src="images/brand-logo-full.svg" alt="月繳買家電" class="footer-logo-img" />
       </div>
       <p class="footer-desc">
         我們致力於透過創新的分期支付方案，讓每個人都能輕鬆擁有高品質的高端家電，提升生活美學與便利性。

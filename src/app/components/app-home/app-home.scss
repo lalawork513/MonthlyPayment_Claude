@@ -75,10 +75,15 @@ ul {
 .header-inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   max-width: 1400px;
   margin: 0 auto;
   padding: 3px 16px;
+
+  @media (max-width: 1115px) {
+    padding: 1px 8px;
+  }
 }
 
 // Logo
@@ -146,7 +151,7 @@ ul {
   gap: 2px;
   flex: 1;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1115px) {
     display: none;
   }
 }
@@ -256,7 +261,7 @@ ul {
   justify-content: center;
   color: $text-main;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1115px) {
     display: flex;
   }
 }
@@ -322,7 +327,7 @@ ul {
   flex-direction: column;
   gap: 0;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1115px) {
     display: none;
   }
 }
@@ -637,7 +642,7 @@ ul {
   }
 
   @media (max-width: 600px) {
-    width: 40%;
+    // width: 40%;
     opacity: 0.3;
   }
 }
@@ -986,6 +991,7 @@ ul {
 .monthly-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
 }
 
@@ -1003,6 +1009,14 @@ ul {
   flex-shrink: 0;
 }
 
+.monthly-logo-img {
+  width: 100%;
+  height: 100%;
+  max-width: 30px;
+  object-fit: contain;
+}
+
+
 .monthly-label {
   font-size: 11px;
   font-weight: 600;
@@ -1019,7 +1033,8 @@ ul {
 .original-price {
   font-size: 11px;
   color: $text-muted;
-  padding-left: 32px;
+  // padding-left: 32px;
+  text-align: right;
 }
 
 .add-cart-btn {
@@ -1069,6 +1084,13 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.footer-logo-img {
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 30px;
+  width: 120px;
 }
 
 .footer-logo {
